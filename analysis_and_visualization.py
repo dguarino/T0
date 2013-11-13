@@ -43,8 +43,20 @@ def perform_analysis_and_visualization(data_store):
         #PlotTuningCurve( dsv, ParameterSet({'parameter_name':'orientation', 'neurons':list(analog_Xon_ids), 'sheet_name':'X_ON'}), fig_param={'dpi' : 100,'figsize': (16,5)}, plot_file_name="OrTuning_LGN_On.png").plot({'*.y_lim' : (0,100)})
         
         # SIZE TUNING select data based on analysis
-        dsv = param_filter_query( data_store ,st_name='DriftingSinusoidalGratingDisk', analysis_algorithm=['TrialAveragedFiringRate'] )  
-        PlotTuningCurve(dsv,ParameterSet({'parameter_name' : 'radius', 'neurons': list(analog_Xon_ids), 'sheet_name' : 'X_ON'}), fig_param={'dpi' : 100,'figsize': (16,4)}, plot_file_name="SizeTuning_LGN_On.png").plot({'*.y_lim' : (0,100)})
+        dsv = param_filter_query( data_store ,st_name='DriftingSinusoidalGratingDisk', analysis_algorithm=['TrialAveragedFiringRate'], st_radius=[] )  
+        PlotTuningCurve(
+            dsv,
+            ParameterSet({
+                'parameter_name' : 'radius', 
+                'neurons': list(analog_Xon_ids), 
+                'sheet_name' : 'X_ON'
+            }), 
+            fig_param={'dpi' : 100,'figsize': (16,6)}, 
+            plot_file_name="SizeTuning_LGN_On.png"
+        ).plot({
+            '*.y_lim':(0,100), 
+            '*.x_scale':'log', '*.x_scale_base':2
+        })
        
 	    # ---- LGN0 ----
         OverviewPlot(

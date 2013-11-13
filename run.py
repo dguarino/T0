@@ -25,13 +25,18 @@ MPI_ROOT = 0
 
 logger = mozaik.getMozaikLogger()
 
+
 if True:
     data_store,model = run_workflow( 'T0', T0_Model, create_experiments )
-    
 else: 
     setup_logging()
-    data_store = PickledDataStore(load=True,parameters=ParameterSet({'root_directory':'T0_test_____'}),replace=True)
+    data_store = PickledDataStore(
+        load=True,
+        parameters=ParameterSet({ 'store_stimuli':False, 'root_directory':'T0_test_____' })
+        ,replace=True
+    )
     logger.info('Loaded data store')
+
 
 if mpi_comm.rank == MPI_ROOT:
     perform_analysis_and_visualization(data_store)
