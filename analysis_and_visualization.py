@@ -36,14 +36,8 @@ def perform_analysis_and_visualization(data_store):
         }
         data_store.print_content( full_ADS=True )
         
-        # SIZE TUNING
-        import ast
-        radiuses = [0.0]
-        for dse in data_store.analysis_results:
-            if dse.stimulus_id:
-                stim = ast.literal_eval( dse.stimulus_id )
-                radiuses.append( stim['radius'] )
-        dsv = param_filter_query( data_store, st_name='DriftingSinusoidalGratingDisk', analysis_algorithm=['TrialAveragedFiringRate'], st_radius=radiuses )
+        # SIZE TUNING                
+        dsv = param_filter_query( data_store, st_name='DriftingSinusoidalGratingDisk', analysis_algorithm=['TrialAveragedFiringRate'] )
         PlotTuningCurve(
             dsv,
             ParameterSet({

@@ -29,24 +29,24 @@
             },
             'width': 2.6, # degrees
             'height': 2.6, # degrees
-            'spatial_resolution': 0.1, #0.025, # degrees
+            'spatial_resolution': 0.025, # degrees
             'temporal_resolution': 7.0, # ms
             'duration': 100.0,
         },
-        'gain': 1.0, # nA.m²/cd
+        'gain': 30.0, # nA.m²/cd
         'cell': {
             'model': 'IF_cond_exp',
             'params': {
-                'v_thresh':-57.0,
-                'v_rest': -70.0,
-                'v_reset': -70.0,
-                'tau_refrac': 2.0,
-                'tau_m': 10.0,
-                'cm': 0.29,
-                'e_rev_E': 0.0,
-                'e_rev_I': -75.0,
-                'tau_syn_E': 1.5,
-                'tau_syn_I': 10.0, 
+                'v_thresh':-40.0, # WorgotterKoch1991
+                'v_rest': -70.0, # WorgotterKoch1991
+                'v_reset': -90.0, # WorgotterKoch1991
+                'tau_refrac': 2.0, # Kremkow2014
+                'tau_m': 10.0, # WorgotterKoch1991
+                'cm': 1.0, # WorgotterKoch1991 #0.29, Jens
+                'e_rev_E': 20.0, # WorgotterKoch1991
+                'e_rev_I': -90.0, # Kremkow2014
+                'tau_syn_E': 1.0, # CastiHayotXiaoKaplan2008 #1.5, Jens
+                'tau_syn_I': 1.0, # CastiHayotXiaoKaplan2008 #10.0, Jens
             },
             'initial_values': {
                 'v': -70.0,
@@ -55,7 +55,7 @@
         
         'noise': {
             'mean': 0.0,
-            'stdev': 2.7, #nA
+            'stdev': 50.0, #nA
         }
     }
 }

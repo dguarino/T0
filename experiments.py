@@ -10,7 +10,7 @@ def create_experiments(model):
             # EXTRA-CLASSICAL SIZE TUNING (GRATING DISCS)
             MeasureSizeTuning(
                 model, 
-                num_sizes=24, 
+                num_sizes=5, 
                 max_size=8.0, 
                 orientation=numpy.pi/2, #1.0, 
                 spatial_frequency=0.8, 
