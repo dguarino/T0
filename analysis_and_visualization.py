@@ -15,13 +15,13 @@ def perform_analysis_and_visualization(data_store):
 
     if True: # ---- ANALYSIS ----
         
-        # ORIENTATION TUNING
-        #dsv = param_filter_query( data_store, st_name='FullfieldDriftingSinusoidalGrating', sheet_name='X_ON' ) 
-        #TrialAveragedFiringRate( dsv, ParameterSet({}) ).analyse()
-        
         # SIZE TUNING
         dsv = param_filter_query( data_store, st_name='DriftingSinusoidalGratingDisk', sheet_name='X_ON' )  
         TrialAveragedFiringRate( dsv, ParameterSet({}) ).analyse()
+        
+        # ORIENTATION TUNING
+        #dsv = param_filter_query( data_store, st_name='FullfieldDriftingSinusoidalGrating', sheet_name='X_ON' ) 
+        #TrialAveragedFiringRate( dsv, ParameterSet({}) ).analyse()
         
         # Save analysis
         data_store.save()
@@ -35,15 +35,15 @@ def perform_analysis_and_visualization(data_store):
             'resolution' : 0
         }
         data_store.print_content( full_ADS=True )
-
-        # ORIENTATION TUNING
-        # retrieve analysed data
-        #dsv = param_filter_query( data_store ,st_name='FullfieldDriftingSinusoidalGrating', analysis_algorithm=['TrialAveragedFiringRate'] )
-        # plot retrieved data
-        #PlotTuningCurve( dsv, ParameterSet({'parameter_name':'orientation', 'neurons':list(analog_Xon_ids), 'sheet_name':'X_ON'}), fig_param={'dpi' : 100,'figsize': (16,5)}, plot_file_name="OrTuning_LGN_On.png").plot({'*.y_lim' : (0,100)})
         
-        # SIZE TUNING select data based on analysis
-        dsv = param_filter_query( data_store ,st_name='DriftingSinusoidalGratingDisk', analysis_algorithm=['TrialAveragedFiringRate'], st_radius=[] )  
+        # SIZE TUNING
+        import ast
+        radiuses = [0.0]
+        for dse in data_store.analysis_results:
+            if dse.stimulus_id:
+                stim = ast.literal_eval( dse.stimulus_id )
+                radiuses.append( stim['radius'] )
+        dsv = param_filter_query( data_store, st_name='DriftingSinusoidalGratingDisk', analysis_algorithm=['TrialAveragedFiringRate'], st_radius=radiuses )
         PlotTuningCurve(
             dsv,
             ParameterSet({
@@ -57,7 +57,21 @@ def perform_analysis_and_visualization(data_store):
             '*.y_lim':(0,100), 
             '*.x_scale':'log', '*.x_scale_base':2
         })
-       
+            
+        # CONTRAST SATURATION
+        
+        # MASKING
+        
+        # LIFELONG SPARSENESS
+
+        # ORIENTATION TUNING
+        # retrieve analysed data
+        #dsv = param_filter_query( data_store ,st_name='FullfieldDriftingSinusoidalGrating', analysis_algorithm=['TrialAveragedFiringRate'] )
+        # plot retrieved data
+        #PlotTuningCurve( dsv, ParameterSet({'parameter_name':'orientation', 'neurons':list(analog_Xon_ids), 'sheet_name':'X_ON'}), fig_param={'dpi' : 100,'figsize': (16,5)}, plot_file_name="OrTuning_LGN_On.png").plot({'*.y_lim' : (0,100)})
+        
+        # FILLING-IN
+        
 	    # ---- LGN0 ----
         OverviewPlot(
             data_store,
@@ -69,7 +83,7 @@ def perform_analysis_and_visualization(data_store):
             fig_param={'dpi' : 100,'figsize': (14,12)},
             plot_file_name="LGN_On.png"
         ).plot()
-
+        
         #OverviewPlot(
         #    data_store,
         #    ParameterSet({
