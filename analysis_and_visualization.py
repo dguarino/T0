@@ -15,7 +15,7 @@ def perform_analysis_and_visualization(data_store):
 
     if True: # ---- ANALYSIS ----
         
-        # SIZE TUNING
+        # SIZE TUNING, CONTRAST SENSITIVITY
         dsv = param_filter_query( data_store, st_name='DriftingSinusoidalGratingDisk', sheet_name='X_ON' )  
         TrialAveragedFiringRate( dsv, ParameterSet({}) ).analyse()
         
@@ -53,6 +53,20 @@ def perform_analysis_and_visualization(data_store):
         })
             
         # CONTRAST SATURATION
+        #dsv = param_filter_query( data_store, st_name='DriftingSinusoidalGratingDisk', analysis_algorithm=['TrialAveragedFiringRate'] )
+        #PlotTuningCurve(
+        #    dsv,
+        #    ParameterSet({
+        #        'parameter_name' : 'contrast', 
+        #        'neurons': list(analog_Xon_ids), 
+        #        'sheet_name' : 'X_ON'
+        #    }), 
+        #    fig_param={'dpi' : 100,'figsize': (16,6)}, 
+        #    plot_file_name="ContrastSensitivity_LGN_On.png"
+        #).plot({
+        #    '*.y_lim':(0,100), 
+        #    #'*.x_scale':'log', '*.x_scale_base':2
+        #})
         
         # MASKING
         

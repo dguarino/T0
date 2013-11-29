@@ -3,13 +3,12 @@
     'params': {
         'density': 1, # 10.0 neurons per degree squared
         'size'  : (6.0,6.0), # the effective size of the modelled section of retina/lgn
-        'linear_scaler': 2.5,
+        'linear_scaler': 1.0,# 2.5, # 
         'mpi_reproducible_noise' : True,
         'cached' : False,
         'cache_path' : 'retinal_cache/',
         'recorders' :  url("param/lgn_rec"),
         'receptive_field': {
-            #'func': 'lambda x,y,t,p: numpy.sin(t)',
             'func': 'cai97.stRF_2d',
             'func_params': {
                 'Ac': 1.0,# AllenFreeman2006
@@ -23,17 +22,17 @@
                 't1': -6.0, # ms# AllenFreeman2006
                 't2': -6.0, # ms# AllenFreeman2006
                 'td': 6.0, # time differece between ON-OFF # AllenFreeman2006
-                'sigma_c': 0.4, # sigma of center gauss degree
-                'sigma_s': 1.0, # sigma_c*1.5+0.4 AllenFreeman2006 # sigma of surround gauss degree
-                'subtract_mean': True,
+                'sigma_c': 0.5, # AllenFreeman2006
+                'sigma_s': 0.7, # 
+                'subtract_mean': False,
             },
             'width': 2.6, # degrees
             'height': 2.6, # degrees
-            'spatial_resolution': 0.1, # degrees
-            'temporal_resolution': 7.0, # ms
+            'spatial_resolution': 0.1, # degrees, SoShapley1979, SaulHumphrey1990, RuksenasBulatovHeggelund2007
+            'temporal_resolution': 7.0, # ms, 
             'duration': 100.0,
         },
-        'gain': 30.0, # nA.m²/cd
+        'gain': 4.5, # in order to get a firing rate of 80spike/sec
         'cell': {
             'model': 'IF_cond_exp',
             'params': {
@@ -44,7 +43,7 @@
                 'tau_m': 10.0, # WorgotterKoch1991
                 'cm': 1.0, # WorgotterKoch1991 #0.29, Jens
                 'e_rev_E': 20.0, # WorgotterKoch1991
-                'e_rev_I': -81.0, # Traub_etal2005 # Kremkow2014
+                'e_rev_I': -81.0, # Traub_etal2005
                 'tau_syn_E': 1.0, # CastiHayotXiaoKaplan2008 #1.5, Jens
                 'tau_syn_I': 1.0, # CastiHayotXiaoKaplan2008 #10.0, Jens
             },
@@ -55,7 +54,7 @@
         
         'noise': {
             'mean': 0.0,
-            'stdev': 15.0, #nA
+            'stdev': 5.0, #nA
         }
     }
 }
