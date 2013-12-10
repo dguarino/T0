@@ -11,21 +11,19 @@
         'receptive_field': {
             'func': 'cai97.stRF_2d',
             'func_params': {
-                # spatial filter
-                'Ac': 1.00,# SceniakChatterjeeCallaway2006 (based on Rodieck1965)
-                'As': 0.25, # SceniakChatterjeeCallaway2006
-                'sigma_c': 0.5, # SceniakChatterjeeCallaway2006
-                'sigma_s': 1.2, # SceniakChatterjeeCallaway2006
-                # temporal filter
+                'Ac': 1.0,# AllenFreeman2006
+                'As': 0.3, # AllenFreeman2006
                 'K1': 1.05, # AllenFreeman2006
                 'K2': 0.7, # AllenFreeman2006
                 'c1': 0.14, # AllenFreeman2006
                 'c2': 0.12, # AllenFreeman2006
                 'n1': 7.0, # AllenFreeman2006
                 'n2': 8.0, # AllenFreeman2006
-                't1': -6.0, # ms # AllenFreeman2006
-                't2': -6.0, # ms # AllenFreeman2006
+                't1': -6.0, # ms# AllenFreeman2006
+                't2': -6.0, # ms# AllenFreeman2006
                 'td': 6.0, # time differece between ON-OFF # AllenFreeman2006
+                'sigma_c': 1.15, # AllenFreeman2006
+                'sigma_s': 2.12, # AllenFreeman2006, 1.5*sigma_c+0.4
                 'subtract_mean': False,
             },
             'width': 2.6, # degrees
@@ -34,13 +32,13 @@
             'temporal_resolution': 7.0, # ms, 
             'duration': 100.0,
         },
-        'gain': 12.0, # ST filter gain
+        'gain': 2.0, # ST filter gain
         'cell': {
             'model': 'IF_cond_exp',
             'params': {
                 'v_thresh':-40.0, # WorgotterKoch1991
                 'v_rest': -70.0, # WorgotterKoch1991
-                'v_reset': -70.0, # Kremkow2014: mean of WorgotterKoch1991(-90), LesicaWengJinYehAlonsoStanley2006(-50)
+                'v_reset': -90.0, # Kremkow2014: mean of WorgotterKoch1991(-90), LesicaWengJinYehAlonsoStanley2006(-50)
                 'tau_refrac': 2.0, # Kremkow2014
                 'tau_m': 10.0, # WorgotterKoch1991
                 'cm': 1.0, # WorgotterKoch1991 #0.29, Jens
@@ -56,7 +54,7 @@
         
         'noise': {
             'mean': 0.0,
-            'stdev': 3.0, #nA
+            'stdev': 1.0, #nA
         }
     }
 }
