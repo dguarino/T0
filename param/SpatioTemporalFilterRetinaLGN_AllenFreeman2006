@@ -24,7 +24,7 @@
                 'td': 6.0, # time differece between ON-OFF # AllenFreeman2006
                 'sigma_c': 1.15, # AllenFreeman2006
                 'sigma_s': 2.12, # AllenFreeman2006, 1.5*sigma_c+0.4
-                'subtract_mean': False,
+                'subtract_mean': True,
             },
             'width': 2.6, # degrees
             'height': 2.6, # degrees
@@ -32,7 +32,7 @@
             'temporal_resolution': 7.0, # ms, 
             'duration': 100.0,
         },
-        'gain': 2.0, # ST filter gain
+        'gain': 10.0, # ST filter gain
         'cell': {
             'model': 'IF_cond_exp',
             'params': {

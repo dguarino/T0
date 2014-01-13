@@ -40,7 +40,7 @@
             'params': {
                 'v_thresh':-40.0, # WorgotterKoch1991
                 'v_rest': -70.0, # WorgotterKoch1991
-                'v_reset': -70.0, # Kremkow2014: mean of WorgotterKoch1991(-90), LesicaWengJinYehAlonsoStanley2006(-50)
+                'v_reset': -70.0, # Kremkow2014: WorgotterKoch1991(-90), LesicaWengJinYehAlonsoStanley2006(-50)
                 'tau_refrac': 2.0, # Kremkow2014
                 'tau_m': 10.0, # WorgotterKoch1991
                 'cm': 1.0, # WorgotterKoch1991 #0.29, Jens
@@ -53,7 +53,6 @@
                 'v': -70.0,
             },
         },
-        
         'noise': {
             'mean': 0.0,
             'stdev': 3.0, #nA
