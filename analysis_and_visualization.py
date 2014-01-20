@@ -19,12 +19,12 @@ def perform_analysis_and_visualization(data_store):
         #dsv = param_filter_query( data_store, st_name='Null', sheet_name='X_ON' )  
         #TrialAveragedFiringRate( dsv, ParameterSet({}) ).analyse()
         
-        # FREQUENCY TUNING, SIZE TUNING, CONTRAST SENSITIVITY
+        # SPATIAL AND TEMPORAL FREQUENCY TUNING, SIZE TUNING, CONTRAST SENSITIVITY
         dsv = param_filter_query( data_store, st_name='DriftingSinusoidalGratingDisk', sheet_name='X_ON' )  
         # on responses
-        #TrialAveragedFiringRate( dsv, ParameterSet({}) ).analyse()
+        TrialAveragedFiringRate( dsv, ParameterSet({}) ).analyse()
         # on Vms
-        Analog_MeanSTDAndFanoFactor( dsv, ParameterSet({}) ).analyse()
+        #Analog_MeanSTDAndFanoFactor( dsv, ParameterSet({}) ).analyse()
         
         # ORIENTATION TUNING
         #dsv = param_filter_query( data_store, st_name='FullfieldDriftingSinusoidalGrating', sheet_name='X_ON' ) 
@@ -61,7 +61,7 @@ def perform_analysis_and_visualization(data_store):
         #})
 
         #-----------------
-        # FREQUENCY TUNING                
+        # SPATIAL FREQUENCY TUNING                
         #dsv = param_filter_query( data_store, st_name='DriftingSinusoidalGratingDisk', analysis_algorithm=['TrialAveragedFiringRate'] )
         #dsv = param_filter_query(data_store, identifier='PerNeuronValue', value_name='Mean(VM)', sheet_name='X_ON')
         #PlotTuningCurve(
@@ -72,12 +72,31 @@ def perform_analysis_and_visualization(data_store):
         #        'sheet_name' : 'X_ON'
         #    }), 
         #    fig_param={'dpi' : 100,'figsize': (16,6)}, 
-        #    plot_file_name="FrequencyTuning_LGN_On.png"
+        #    plot_file_name="SpatialFrequencyTuning_LGN_On.png"
         #).plot({
         #    #'*.y_lim':(0,100), 
         #    '*.x_scale':'log', '*.x_scale_base':2,
         #    '*.fontsize':7
         #})
+
+        #-----------------
+        # TEMPORAL FREQUENCY TUNING                
+        dsv = param_filter_query( data_store, st_name='DriftingSinusoidalGratingDisk', analysis_algorithm=['TrialAveragedFiringRate'] )
+        ###dsv = param_filter_query(data_store, identifier='PerNeuronValue', value_name='Mean(VM)', sheet_name='X_ON')
+        PlotTuningCurve(
+            dsv,
+            ParameterSet({
+                'parameter_name' : 'temporal_frequency', 
+                'neurons': list(analog_Xon_ids), 
+                'sheet_name' : 'X_ON'
+            }), 
+            fig_param={'dpi' : 100,'figsize': (16,6)}, 
+            plot_file_name="TemporalFrequencyTuning_LGN_On.png"
+        ).plot({
+            #'*.y_lim':(0,100), 
+            '*.x_scale':'log', '*.x_scale_base':2,
+            '*.fontsize':7
+        })
             
         #--------------------
         # CONTRAST SATURATION
