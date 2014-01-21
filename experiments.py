@@ -16,15 +16,16 @@ def create_experiments(model):
             #),
 
             # SPATIAL AND TEMPORAL FREQUENCY TUNING (with different contrasts)
-            MeasureFrequencySensitivity(
-                model, 
-                orientation=numpy.pi/2, 
-                contrasts=[40, 100], 
-                temporal_frequencies=[0.5, 1.0, 3.0, 6.0, 10.0, 15.0, 20.0, 50.0], #[2] old
-                grating_duration=147*7,
-                spatial_frequencies=[0.3], #[0.001, 0.01, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0, 1.3, 1.6, 2.1, 3.2, 6.4], 
-                num_trials=4
-            ),
+            #MeasureFrequencySensitivity(
+            #    model, 
+            #    orientation=numpy.pi/2, 
+            #    contrasts=[40, 100], #[100]
+            #   spatial_frequencies=[0.01, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0, 1.3, 1.6, 2.1, 3.2, 6.4], #[0.3]
+            #    temporal_frequencies=[2.0], #[0.5, 1.0, 3.0, 6.0, 10.0, 15.0, 20.0, 50.0], #[2.0]
+            #    grating_duration=147*7, #25*40
+            #    frame_duration=7, # 40 to test time-dependent changes
+            #    num_trials=4
+            #),
             
             # CONTRAST CONTROL
             #MeasureContrastSensitivity(
@@ -39,18 +40,18 @@ def create_experiments(model):
             #),
     
             # SIZE TUNING
-            #MeasureSizeTuning(
-            #    model, 
-            #    num_sizes=14, 
-            #    max_size=8.0, 
-            #    orientation=numpy.pi/2, 
-            #    spatial_frequency=0.8, #0.25 
-            #    temporal_frequency=2,
-            #    grating_duration=147*7,
-            #    contrasts=[100], # [40, 100] to look for contrast-dependent RF expansion
-            #    num_trials=4,
-            #    log_spacing=True
-            #),
+            MeasureSizeTuning(
+                model, 
+                num_sizes=14, 
+                max_size=8.0, 
+                orientation=numpy.pi/2, 
+                spatial_frequency=0.8, #0.25 
+                temporal_frequency=1,
+                grating_duration=147*7,
+                contrasts=[40, 100], # to look for contrast-dependent RF expansion
+                num_trials=4,
+                log_spacing=True
+            ),
             
             # LIFELONG SPARSENESS
             # as Size Tuning
