@@ -26,7 +26,7 @@ MPI_ROOT = 0
 logger = mozaik.getMozaikLogger()
 
 
-if False:
+if True:
     data_store,model = run_workflow( 'T0', T0_Model, create_experiments )
 else: 
     setup_logging()

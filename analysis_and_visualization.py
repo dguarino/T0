@@ -32,7 +32,7 @@ def perform_analysis_and_visualization(data_store):
         #TrialAveragedFiringRate( dsv, ParameterSet({}) ).analyse()
         
         # Save analysis
-        data_store.save()
+        #data_store.save()
 
 
     if True: # ---- PLOTTING ----
@@ -150,6 +150,7 @@ def perform_analysis_and_visualization(data_store):
         #    '*.x_axis' : None, 
         #    '*.fontsize':7
         #})
+        # Activity Ratio
         dsv = param_filter_query(data_store, analysis_algorithm=['TrialAveragedSparseness'], sheet_name=['X_ON'], value_name='Sparseness')   
         PerNeuronValuePlot(
             dsv,
