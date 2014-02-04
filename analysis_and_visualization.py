@@ -30,9 +30,6 @@ def perform_analysis_and_visualization(data_store):
         # ORIENTATION TUNING
         #dsv = param_filter_query( data_store, st_name='FullfieldDriftingSinusoidalGrating', sheet_name='X_ON' ) 
         #TrialAveragedFiringRate( dsv, ParameterSet({}) ).analyse()
-        
-        # Save analysis
-        #data_store.save()
 
 
     if True: # ---- PLOTTING ----
