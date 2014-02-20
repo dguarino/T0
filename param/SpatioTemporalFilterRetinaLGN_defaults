@@ -2,7 +2,7 @@
     'component': 'mozaik.models.vision.spatiotemporalfilter.SpatioTemporalFilterRetinaLGN',
     'params': {
         'density': 1, # 10.0 neurons per degree squared 
-        'size'  : (6.0,6.0), # the effective size of the modelled section of retina/lgn
+        'size'  : (1.0,1.0), # the effective size of the modelled section of retina/lgn
         'linear_scaler': 1.0, # overall scaling
         'mpi_reproducible_noise' : True,
         'cached' : False,
@@ -12,10 +12,12 @@
             'func': 'cai97.stRF_2d',
             'func_params': {
                 # spatial filter
-                'Ac': 1.00,# SceniakChatterjeeCallaway2006 (based on Rodieck1965)
-                'As': 0.25, # SceniakChatterjeeCallaway2006
-                'sigma_c': 0.5, # SceniakChatterjeeCallaway2006
-                'sigma_s': 1.2, # SceniakChatterjeeCallaway2006
+                'Ac': 1.0, # CaiDeAngelisFreeman1997, SceniakChatterjeeCallaway2006 (DoG model, see paragraph: "Geniculocortical afferent CRF spatial structure")
+                'As': 0.26, # CaiDeAngelisFreeman1997, SceniakChatterjeeCallaway2006
+                'sigma_c': 0.7, # deg CaiDeAngelisFreeman1997, AlonsoUsreyReid2001, SceniakChatterjeeCallaway2006 (0.5)
+                'sigma_s': 1.3, # deg CaiDeAngelisFreeman1997, AlonsoUsreyReid2001, SceniakChatterjeeCallaway2006 (1.4)
+                #(balance has to be considered for the volumes under the gaussians: 2*pi * A*sigma_x*sigma_y)
+                # a balanced RF (center: 1.0*0.7*0.7=0.49; surround: 0.26*1.3*1.3=0.44)
                 # temporal filter
                 'K1': 1.05, # AllenFreeman2006
                 'K2': 0.7, # AllenFreeman2006
@@ -28,13 +30,13 @@
                 'td': 6.0, # time differece between ON-OFF # AllenFreeman2006
                 'subtract_mean': False,
             },
-            'width': 2.6, # degrees
-            'height': 2.6, # degrees
+            'width': 19.0, # degrees
+            'height': 19.0, # degrees
             'spatial_resolution': 0.1, # degrees, 
             'temporal_resolution': 7.0, # ms, 
             'duration': 100.0,
         },
-        'gain': 12.0, # ST filter gain
+        'gain': 400.0, # nA*cd/m²
         'cell': {
             'model': 'IF_cond_exp',
             'params': {
@@ -43,11 +45,11 @@
                 'v_reset': -70.0, # Kremkow2014: WorgotterKoch1991(-90), LesicaWengJinYehAlonsoStanley2006(-50)
                 'tau_refrac': 2.0, # Kremkow2014
                 'tau_m': 10.0, # WorgotterKoch1991
-                'cm': 1.0, # WorgotterKoch1991 #0.29, Jens
+                'cm': 1.0, # WorgotterKoch1991 #0.29, Kremkow2014
                 'e_rev_E': 20.0, # WorgotterKoch1991
                 'e_rev_I': -81.0, # Traub_etal2005
-                'tau_syn_E': 1.0, # CastiHayotXiaoKaplan2008 #1.5, Jens
-                'tau_syn_I': 1.0, # CastiHayotXiaoKaplan2008 #10.0, Jens
+                'tau_syn_E': 1.0, # CastiHayotXiaoKaplan2008 #1.5, Kremkow2014
+                'tau_syn_I': 1.0, # CastiHayotXiaoKaplan2008 #10.0, Kremkow2014
             },
             'initial_values': {
                 'v': -70.0,
@@ -55,7 +57,7 @@
         },
         'noise': {
             'mean': 0.0,
-            'stdev': 3.0, #nA
+            'stdev': 10.0, # nA
         }
     }
 }
