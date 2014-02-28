@@ -16,20 +16,24 @@ def perform_analysis_and_visualization(data_store):
     if True: # ---- ANALYSIS ----
         
         # LUMINANCE SENSITIVITY
-        dsv0 = param_filter_query( data_store, st_name='Null', sheet_name='X_ON' )  
-        TrialAveragedFiringRate( dsv0, ParameterSet({}) ).analyse()
-        dsv0 = param_filter_query( data_store, st_name='Null', sheet_name='X_OFF' )  
-        TrialAveragedFiringRate( dsv0, ParameterSet({}) ).analyse()
+        # dsv00 = param_filter_query( data_store, st_name='Null', sheet_name='X_ON' )  
+        # TrialAveragedFiringRate( dsv00, ParameterSet({}) ).analyse()
+        # dsv01 = param_filter_query( data_store, st_name='Null', sheet_name='X_OFF' )  
+        # TrialAveragedFiringRate( dsv01, ParameterSet({}) ).analyse()
 
         # CONTRAST SENSITIVITY, SPATIAL AND TEMPORAL FREQUENCY TUNING, SIZE TUNING, SPARSENESS
-        dsv1 = param_filter_query( data_store, st_name='DriftingSinusoidalGratingDisk', sheet_name='X_ON' )  
-        TrialAveragedFiringRate( dsv1, ParameterSet({}) ).analyse() # on responses
+        dsv10 = param_filter_query( data_store, st_name='DriftingSinusoidalGratingDisk', sheet_name='X_ON' )  
+        TrialAveragedFiringRate( dsv10, ParameterSet({}) ).analyse() # on responses
+        dsv11 = param_filter_query( data_store, st_name='DriftingSinusoidalGratingDisk', sheet_name='X_OFF' )  
+        TrialAveragedFiringRate( dsv11, ParameterSet({}) ).analyse() # on responses
         # TrialAveragedSparseness( dsv1, ParameterSet({}) ).analyse() # on responses: Sparseness
         # Analog_MeanSTDAndFanoFactor( dsv1, ParameterSet({}) ).analyse() # on Vm: FanoFactor
         
         # ORIENTATION TUNING
-        # dsv2 = param_filter_query( data_store, st_name='FullfieldDriftingSinusoidalGrating', sheet_name='X_ON' ) 
-        # TrialAveragedFiringRate( dsv2, ParameterSet({}) ).analyse()
+        # dsv20 = param_filter_query( data_store, st_name='FullfieldDriftingSinusoidalGrating', sheet_name='X_ON' ) 
+        # TrialAveragedFiringRate( dsv20, ParameterSet({}) ).analyse()
+        # dsv21 = param_filter_query( data_store, st_name='FullfieldDriftingSinusoidalGrating', sheet_name='X_OFF' ) 
+        # TrialAveragedFiringRate( dsv21, ParameterSet({}) ).analyse()
 
 
     if True: # ---- PLOTTING ----
@@ -45,55 +49,68 @@ def perform_analysis_and_visualization(data_store):
         #----------------------
         # LUMINANCE SENSITIVITY  
         #firing rate against luminance levels              
-        dsv = param_filter_query( data_store, st_name='Null', analysis_algorithm=['TrialAveragedFiringRate'] )
-        PlotTuningCurve(
-           dsv,
-           ParameterSet({
-               'parameter_name' : 'background_luminance', 
-               'neurons': list(analog_Xon_ids), 
-               'sheet_name' : 'X_ON'
-           }), 
-           fig_param={'dpi' : 100,'figsize': (6,6)}, 
-           plot_file_name="FlatLuminanceSensitivity_LGN_On.png"
-        ).plot({
-           '*.y_lim':(0,30), 
-           '*.x_lim':(-10,100), 
-           '*.fontsize':17
-        })
-        dsv = param_filter_query( data_store, st_name='Null', analysis_algorithm=['TrialAveragedFiringRate'] )
-        PlotTuningCurve(
-           dsv,
-           ParameterSet({
-               'parameter_name' : 'background_luminance', 
-               'neurons': list(analog_Xoff_ids), 
-               'sheet_name' : 'X_OFF'
-           }), 
-           fig_param={'dpi' : 100,'figsize': (6,6)}, 
-           plot_file_name="FlatLuminanceSensitivity_LGN_Off.png"
-        ).plot({
-           '*.y_lim':(0,30), 
-           '*.x_lim':(-10,100), 
-           '*.fontsize':17
-        })
+        # dsv = param_filter_query( data_store, st_name='Null', analysis_algorithm=['TrialAveragedFiringRate'] )
+        # PlotTuningCurve(
+        #    dsv,
+        #    ParameterSet({
+        #        'parameter_name' : 'background_luminance', 
+        #        'neurons': list(analog_Xon_ids), 
+        #        'sheet_name' : 'X_ON'
+        #    }), 
+        #    fig_param={'dpi' : 100,'figsize': (6,6)}, 
+        #    plot_file_name="FlatLuminanceSensitivity_LGN_On.png"
+        # ).plot({
+        #    '*.y_lim':(0,30), 
+        #    '*.x_lim':(-10,100), 
+        #    '*.fontsize':17
+        # })
+        # PlotTuningCurve(
+        #    dsv,
+        #    ParameterSet({
+        #        'parameter_name' : 'background_luminance', 
+        #        'neurons': list(analog_Xoff_ids), 
+        #        'sheet_name' : 'X_OFF'
+        #    }), 
+        #    fig_param={'dpi' : 100,'figsize': (6,6)}, 
+        #    plot_file_name="FlatLuminanceSensitivity_LGN_Off.png"
+        # ).plot({
+        #    '*.y_lim':(0,30), 
+        #    '*.x_lim':(-10,100), 
+        #    '*.fontsize':17
+        # })
 
         #--------------------
         # CONTRAST SENSITIVITY
         # firing rate against contrast levels
-        dsv = param_filter_query( data_store, st_name='DriftingSinusoidalGratingDisk', analysis_algorithm=['TrialAveragedFiringRate'] )
-        PlotTuningCurve(
-           dsv,
-           ParameterSet({
-               'parameter_name' : 'contrast', 
-               'neurons': list(analog_Xon_ids), 
-               'sheet_name' : 'X_ON'
-           }), 
-           fig_param={'dpi' : 100,'figsize': (6,6)}, 
-           plot_file_name="ContrastSensitivity_LGN_On.png"
-        ).plot({
-           '*.y_lim':(0,60), 
-           #'*.x_scale':'log', '*.x_scale_base':2,
-           '*.fontsize':17
-        })
+        # dsv = param_filter_query( data_store, st_name='DriftingSinusoidalGratingDisk', analysis_algorithm=['TrialAveragedFiringRate'] )
+        # PlotTuningCurve(
+        #    dsv,
+        #    ParameterSet({
+        #        'parameter_name' : 'contrast', 
+        #        'neurons': list(analog_Xon_ids), 
+        #        'sheet_name' : 'X_ON'
+        #    }), 
+        #    fig_param={'dpi' : 100,'figsize': (6,6)}, 
+        #    plot_file_name="ContrastSensitivity_LGN_On.png"
+        # ).plot({
+        #    '*.y_lim':(0,60), 
+        #    #'*.x_scale':'log', '*.x_scale_base':2,
+        #    '*.fontsize':17
+        # })
+        # PlotTuningCurve(
+        #    dsv,
+        #    ParameterSet({
+        #        'parameter_name' : 'contrast', 
+        #        'neurons': list(analog_Xoff_ids), 
+        #        'sheet_name' : 'X_OFF'
+        #    }), 
+        #    fig_param={'dpi' : 100,'figsize': (6,6)}, 
+        #    plot_file_name="ContrastSensitivity_LGN_Off.png"
+        # ).plot({
+        #    '*.y_lim':(0,60), 
+        #    #'*.x_scale':'log', '*.x_scale_base':2,
+        #    '*.fontsize':17
+        # })
 
         #-----------------
         # SPATIAL FREQUENCY TUNING
@@ -109,9 +126,23 @@ def perform_analysis_and_visualization(data_store):
         #    fig_param={'dpi' : 100,'figsize': (6,6)}, 
         #    plot_file_name="SpatialFrequencyTuning_LGN_On.png"
         # ).plot({
-        #    '*.y_lim':(0,50), 
+        #    '*.y_lim':(0,60), 
         #    '*.x_scale':'log', '*.x_scale_base':2,
-        #    '*.fontsize':7
+        #    '*.fontsize':17
+        # })
+        # PlotTuningCurve(
+        #    dsv,
+        #    ParameterSet({
+        #        'parameter_name' : 'spatial_frequency', 
+        #        'neurons': list(analog_Xoff_ids), 
+        #        'sheet_name' : 'X_OFF'
+        #    }), 
+        #    fig_param={'dpi' : 100,'figsize': (6,6)}, 
+        #    plot_file_name="SpatialFrequencyTuning_LGN_Off.png"
+        # ).plot({
+        #    '*.y_lim':(0,60), 
+        #    '*.x_scale':'log', '*.x_scale_base':2,
+        #    '*.fontsize':17
         # })
 
         #-----------------
@@ -127,29 +158,57 @@ def perform_analysis_and_visualization(data_store):
         #   fig_param={'dpi' : 100,'figsize': (6,6)}, 
         #   plot_file_name="TemporalFrequencyTuning_LGN_On.png"
         # ).plot({
-        #    '*.y_lim':(0,80), 
+        #    '*.y_lim':(0,60), 
         #    '*.x_scale':'log', '*.x_scale_base':2,
-        #    '*.fontsize':7
+        #    '*.fontsize':17
+        # })
+        # PlotTuningCurve(
+        #    dsv,
+        #    ParameterSet({
+        #        'parameter_name' : 'temporal_frequency', 
+        #        'neurons': list(analog_Xoff_ids), 
+        #        'sheet_name' : 'X_OFF'
+        #   }), 
+        #   fig_param={'dpi' : 100,'figsize': (6,6)}, 
+        #   plot_file_name="TemporalFrequencyTuning_LGN_Off.png"
+        # ).plot({
+        #    '*.y_lim':(0,60), 
+        #    '*.x_scale':'log', '*.x_scale_base':2,
+        #    '*.fontsize':17
         # })
 
         #------------
         # SIZE TUNING
         # firing rate against sizes
-        # dsv = param_filter_query( data_store, st_name='DriftingSinusoidalGratingDisk', analysis_algorithm=['TrialAveragedFiringRate'] )
-        # PlotTuningCurve(
-        #    dsv,
-        #    ParameterSet({
-        #        'parameter_name' : 'radius', 
-        #        'neurons': list(analog_Xon_ids), 
-        #        'sheet_name' : 'X_ON'
-        #    }), 
-        #    fig_param={'dpi' : 100,'figsize': (60,6)}, 
-        #    plot_file_name="SizeTuning_LGN_On.png"
-        # ).plot({
-        #    '*.y_lim':(0,50), 
-        #    '*.x_scale':'log', '*.x_scale_base':2,
-        #    '*.fontsize':7
-        # })
+        dsv = param_filter_query( data_store, st_name='DriftingSinusoidalGratingDisk', analysis_algorithm=['TrialAveragedFiringRate'] )
+        PlotTuningCurve(
+           dsv,
+           ParameterSet({
+               'parameter_name' : 'radius', 
+               'neurons': list(analog_Xon_ids), 
+               'sheet_name' : 'X_ON'
+           }), 
+           fig_param={'dpi' : 100,'figsize': (6,6)}, 
+           plot_file_name="SizeTuning_LGN_On.png"
+        ).plot({
+           '*.y_lim':(0,80), 
+           '*.x_scale':'log', '*.x_scale_base':2,
+           '*.fontsize':17
+        })
+        PlotTuningCurve(
+           dsv,
+           ParameterSet({
+               'parameter_name' : 'radius', 
+               'neurons': list(analog_Xoff_ids), 
+               'sheet_name' : 'X_OFF'
+           }), 
+           fig_param={'dpi' : 100,'figsize': (6,6)}, 
+           plot_file_name="SizeTuning_LGN_Off.png"
+        ).plot({
+           '*.y_lim':(0,80), 
+           '*.x_scale':'log', '*.x_scale_base':2,
+           '*.fontsize':17
+        })
                 
         #--------------------
         # LIFELONG SPARSENESS
@@ -210,6 +269,7 @@ def perform_analysis_and_visualization(data_store):
            plot_file_name="LGN_On.png"
         ).plot({
             'Vm_plot.*.y_lim' : (-100,-40),
+            '*.fontsize':7
         })
         
         OverviewPlot(
@@ -223,6 +283,7 @@ def perform_analysis_and_visualization(data_store):
            plot_file_name="LGN_Off.png"
         ).plot({
             'Vm_plot.*.y_lim' : (-100,-40),
+            '*.fontsize':7
         })
 
 
