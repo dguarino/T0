@@ -46,18 +46,19 @@ def create_experiments(model):
     
             # SIZE TUNING
             # as in ClelandLeeVidyasagar1983, BoninManteCarandini2005
-            MeasureSizeTuning(
-                model, 
-                num_sizes=26, 
-                max_size=8.0, 
-                orientation=numpy.pi/2, 
-                spatial_frequency=0.1, 
-                temporal_frequency=6.0,
-                grating_duration=147*7,
-                contrasts=[40, 100], # to look for contrast-dependent RF expansion
-                num_trials=14,
-                log_spacing=True
-            ),
+            # MeasureSizeTuning(
+            #     model, 
+            #     num_sizes=18, 
+            #     max_size=8.0, 
+            #     orientation=numpy.pi/2, 
+            #     spatial_frequency=0.1, 
+            #     temporal_frequency=6.0,
+            #     grating_duration=147*7,
+            #     contrasts=[100], #40,  to look for contrast-dependent RF expansion
+            #     num_trials=14,
+            #     log_spacing=True,
+            #     with_flat=True #False, use also flat luminance discs
+            # ),
             
             # LIFELONG SPARSENESS
             # as in RathbunWarlandUsrey2010, AndolinaJonesWangSillito2007
@@ -65,15 +66,15 @@ def create_experiments(model):
             
             # ORIENTATION TUNING (GRATINGS)
             # as in DanielsNormanPettigrew1977, VidyasagarUrbas1982
-            # MeasureOrientationTuningFullfield(
-            #     model,
-            #     num_orientations=6,
-            #     spatial_frequency=0.1,
-            #     temporal_frequency=2,
-            #     grating_duration=147*7,
-            #     contrasts=[40, 100],
-            #     num_trials=14
-            # ),
+            MeasureOrientationTuningFullfield(
+                model,
+                num_orientations=8,
+                spatial_frequency=0.1,
+                temporal_frequency=6.0,
+                grating_duration=147*7,
+                contrasts=[40, 100],
+                num_trials=14
+            ),
 
             # CONTOUR COMPLETION
             # as in SillitoJonesGersteinWest1994
