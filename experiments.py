@@ -8,8 +8,7 @@ def create_experiments(model):
     return [
     
             # LUMINANCE SENSITIVITY
-            # as in SakmannCreutzfeldt1969, although was for retina
-            # as in PapaioannouWhite1972, EvtikhinPolianskiiAlymkulovSokolov2008
+            # as in PapaioannouWhite1972
             # MeasureFlatLuminanceSensitivity(
             #     model, 
             #     luminances=[0.01, 0.1, 1.0, 10.0, 20.0, 100.0],
@@ -19,16 +18,16 @@ def create_experiments(model):
 
             # CONTRAST SENSITIVITY
             # as in DerringtonLennie1984, HeggelundKarlsenFlugsrudNordtug1989, SaulHumphrey1990, BoninManteCarandini2005
-            # MeasureContrastSensitivity(
-            #     model, 
-            #     size=2.0,
-            #     orientation=numpy.pi/2, 
-            #     spatial_frequency=0.2, 
-            #     temporal_frequency=3.0,
-            #     grating_duration=147*7,
-            #     contrasts=[0,10,40,100],
-            #     num_trials=14
-            # ),
+            MeasureContrastSensitivity(
+                model, 
+                size=2.0,
+                orientation=numpy.pi/2, 
+                spatial_frequency=0.2, 
+                temporal_frequency=3.0,
+                grating_duration=147*7,
+                contrasts=[0,10,40,100],
+                num_trials=14
+            ),
 
             # SPATIAL AND TEMPORAL FREQUENCY TUNING (with different contrasts)
             # Spatial: as in SolomonWhiteMartin2002, SceniakChatterjeeCallaway2006
@@ -57,7 +56,7 @@ def create_experiments(model):
             #     contrasts=[100], #40,  to look for contrast-dependent RF expansion
             #     num_trials=14,
             #     log_spacing=True,
-            #     with_flat=True #False, use also flat luminance discs
+            #     with_flat=True #use also flat luminance discs
             # ),
             
             # LIFELONG SPARSENESS
@@ -66,15 +65,15 @@ def create_experiments(model):
             
             # ORIENTATION TUNING (GRATINGS)
             # as in DanielsNormanPettigrew1977, VidyasagarUrbas1982
-            MeasureOrientationTuningFullfield(
-                model,
-                num_orientations=8,
-                spatial_frequency=0.1,
-                temporal_frequency=6.0,
-                grating_duration=147*7,
-                contrasts=[40, 100],
-                num_trials=14
-            ),
+            # MeasureOrientationTuningFullfield(
+            #     model,
+            #     num_orientations=8,
+            #     spatial_frequency=0.1,
+            #     temporal_frequency=6.0,
+            #     grating_duration=147*7,
+            #     contrasts=[40, 100],
+            #     num_trials=14
+            # ),
 
             # CONTOUR COMPLETION
             # as in SillitoJonesGersteinWest1994
