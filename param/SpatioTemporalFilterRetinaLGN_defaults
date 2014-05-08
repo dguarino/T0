@@ -34,13 +34,13 @@
                 'td': 6.0, # time differece between ON-OFF # AllenFreeman2006
                 'subtract_mean': False,
             },
-            'width': 19.0, # degrees
-            'height': 19.0, # degrees
-            'spatial_resolution': 0.1, # degrees
+            'width': 12.0, # degrees
+            'height': 12.0, # degrees
+            'spatial_resolution': 0.2, # degrees
             'temporal_resolution': 7.0, # ms
             'duration': 100.0,
         },
-        'gain': 200.0, # nA*cd/m²
+        'gain': 100.0, # nA*cd/m²
         'cell': {
             'model': 'IF_cond_exp',
             'params': {
