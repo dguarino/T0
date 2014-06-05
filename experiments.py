@@ -77,25 +77,18 @@ def create_experiments(model):
 
             # CONTOUR COMPLETION
             # as in SillitoJonesGersteinWest1994, SillitoCudeiroMurphy1993
-            MeasureFrequencySensitivity(
+            # By default, for this experiment only, the visual space ('size' parameter in the SpatioTemporalFilterRetinaLGN_default file)
+            # is reduced to a flat line in order to have an horizontal distribution of neurons.
+            # A separation distance is established and the experimental protocol finds the closest neurons to the distance specified.
+            MeasureFeatureInducedCorrelation(
                 model, 
-                orientation=numpy.pi/2, 
-                contrasts=[100], 
-                spatial_frequencies=[0.15], #[0.05, 0.16, 0.64, 1.0, 1.8], #[0.15], #
-                temporal_frequencies=[6.0],
-                grating_duration=147*7,
-                frame_duration=7,
-                num_trials=1,
-                square=True
-            ),
-            MeasureFlashingSquares(
-                model, 
-                orientation=numpy.pi, 
-                contrast=50.0, 
-                temporal_frequency=6.0,
+                contrast=70, 
                 spatial_frequencies=[0.15],
+                separation=6,
+                temporal_frequency=6.0,
                 exp_duration=147*7,
-                num_trials=1
+                frame_duration=7,
+                num_trials=10,
             ),
               
         ]
