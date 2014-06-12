@@ -32,31 +32,31 @@ def create_experiments(model):
             # SPATIAL AND TEMPORAL FREQUENCY TUNING (with different contrasts)
             # Spatial: as in SolomonWhiteMartin2002, SceniakChatterjeeCallaway2006
             # Temporal: as in SaulHumphrey1990, AlittoUsrey2004
-            # MeasureFrequencySensitivity(
-            #     model, 
-            #     orientation=numpy.pi/2, 
-            #     contrasts=[10,50,100], #[100], #
-            #     spatial_frequencies=[0.001, 0.01, 0.05, 0.1, 0.16, 0.24, 0.64, 0.8, 1.0, 1.8], #[0.15], #
-            #     temporal_frequencies=[6.0], #[0.12, 0.5, 1.0, 2.0, 4.0, 6.0, 8.0, 16.0, 32.0, 50.0], #[6.0], #
-            #     grating_duration=147*7,
-            #     frame_duration=7,
-            #     num_trials=14
-            # ),
+            MeasureFrequencySensitivity(
+                model, 
+                orientation=numpy.pi/2, 
+                contrasts=[20,50,100], #[100], #
+                spatial_frequencies=[0.001, 0.01, 0.05, 0.1, 0.16, 0.24, 0.64, 0.8, 1.0, 1.8], #[0.15], #
+                temporal_frequencies=[6.0], #[0.12, 0.5, 1.0, 2.0, 4.0, 6.0, 8.0, 16.0, 32.0, 50.0], #[6.0], #
+                grating_duration=147*7,
+                frame_duration=7,
+                num_trials=10
+            ),
     
             # SIZE TUNING
             # as in ClelandLeeVidyasagar1983, BoninManteCarandini2005
             # MeasureSizeTuning(
             #     model, 
-            #     num_sizes=18, 
+            #     num_sizes=10, 
             #     max_size=8.0, 
             #     orientation=numpy.pi/2, 
             #     spatial_frequency=0.15, 
             #     temporal_frequency=6.0,
             #     grating_duration=147*7,
-            #     contrasts=[40,100], #40,  to look for contrast-dependent RF expansion
-            #     num_trials=14,
+            #     contrasts=[40,100], #40,100  to look for contrast-dependent RF expansion
+            #     num_trials=10,
             #     log_spacing=True,
-            #     with_flat=False #use also flat luminance discs
+            #     with_flat=True #use also flat luminance discs
             # ),
             
             # LIFELONG SPARSENESS
@@ -80,16 +80,16 @@ def create_experiments(model):
             # By default, for this experiment only, the visual space ('size' parameter in the SpatioTemporalFilterRetinaLGN_default file)
             # is reduced to a flat line in order to have an horizontal distribution of neurons.
             # A separation distance is established and the experimental protocol finds the closest neurons to the distance specified.
-            MeasureFeatureInducedCorrelation(
-                model, 
-                contrast=70, 
-                spatial_frequencies=[0.15],
-                separation=6,
-                temporal_frequency=6.0,
-                exp_duration=147*7,
-                frame_duration=7,
-                num_trials=10,
-            ),
+            # MeasureFeatureInducedCorrelation(
+            #     model, 
+            #     contrast=70, 
+            #     spatial_frequencies=[0.15],
+            #     separation=6,
+            #     temporal_frequency=6.0,
+            #     exp_duration=147*7,
+            #     frame_duration=7,
+            #     num_trials=10,
+            # ),
               
         ]
 

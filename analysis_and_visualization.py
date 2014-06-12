@@ -22,10 +22,10 @@ def perform_analysis_and_visualization(data_store):
         # TrialAveragedFiringRate( dsv01, ParameterSet({}) ).analyse()
 
         # CONTRAST SENSITIVITY, SPATIAL AND TEMPORAL FREQUENCY TUNING
-        # dsv10 = param_filter_query( data_store, st_name='FullfieldDriftingSinusoidalGrating', sheet_name='X_ON' )  
-        # TrialAveragedFiringRate( dsv10, ParameterSet({}) ).analyse() # on responses
-        # dsv11 = param_filter_query( data_store, st_name='FullfieldDriftingSinusoidalGrating', sheet_name='X_OFF' )  
-        # TrialAveragedFiringRate( dsv11, ParameterSet({}) ).analyse() # on responses
+        dsv10 = param_filter_query( data_store, st_name='FullfieldDriftingSinusoidalGrating', sheet_name='X_ON' )  
+        TrialAveragedFiringRate( dsv10, ParameterSet({}) ).analyse() # on responses
+        dsv11 = param_filter_query( data_store, st_name='FullfieldDriftingSinusoidalGrating', sheet_name='X_OFF' )  
+        TrialAveragedFiringRate( dsv11, ParameterSet({}) ).analyse() # on responses
 
         # SIZE TUNING, SPARSENESS
         # dsv10 = param_filter_query( data_store, st_name='DriftingSinusoidalGratingDisk', sheet_name='X_ON' )  
@@ -46,10 +46,10 @@ def perform_analysis_and_visualization(data_store):
         # TrialAveragedFiringRate( dsv21, ParameterSet({}) ).analyse()
 
         # CONTOUR COMPLETION
-        dsv30 = param_filter_query( data_store, st_name='FullfieldDriftingSquareGrating', sheet_name='X_ON')
-        TrialAveragedCorrectedCrossCorrelation( dsv30, ParameterSet({'bins':35,'bin_length':5.0,'neurons':analog_Xon_ids,'size':0.1}) ).analyse()
-        dsv31 = param_filter_query( data_store, st_name='FlashingSquares', sheet_name='X_ON')
-        TrialAveragedCorrectedCrossCorrelation( dsv31, ParameterSet({'bins':35,'bin_length':5.0,'neurons':analog_Xon_ids,'size':0.1}) ).analyse()
+        # dsv30 = param_filter_query( data_store, st_name='FullfieldDriftingSquareGrating', sheet_name='X_ON')
+        # TrialAveragedCorrectedCrossCorrelation( dsv30, ParameterSet({'bins':35,'bin_length':5.0,'neurons':analog_Xon_ids,'size':0.1}) ).analyse()
+        # dsv31 = param_filter_query( data_store, st_name='FlashingSquares', sheet_name='X_ON')
+        # TrialAveragedCorrectedCrossCorrelation( dsv31, ParameterSet({'bins':35,'bin_length':5.0,'neurons':analog_Xon_ids,'size':0.1}) ).analyse()
 
 
     if True: # ---- PLOTTING ----
@@ -69,71 +69,79 @@ def perform_analysis_and_visualization(data_store):
         # PlotTuningCurve(
         #    dsv,
         #    ParameterSet({
+        #         'polar': False,
+        #         'pool': False,
         #        'centered': False,
         #        'mean': False,
         #        'parameter_name' : 'background_luminance', 
         #        'neurons': list(analog_Xon_ids), 
         #        'sheet_name' : 'X_ON'
         #    }), 
-        #    fig_param={'dpi' : 100,'figsize': (6,6)}, 
+        #    fig_param={'dpi' : 100,'figsize': (8,8)}, 
         #    plot_file_name="FlatLuminanceSensitivity_LGN_On.png"
         # ).plot({
         #    '*.y_lim':(0,30), 
-        #    '*.x_lim':(-10,100), 
+        #    # '*.x_lim':(-10,100), 
         #    '*.fontsize':17
         # })
         # PlotTuningCurve(
         #    dsv,
         #    ParameterSet({
+        #         'polar': False,
+        #         'pool': False,
         #        'centered': False,
         #        'mean': False,
         #        'parameter_name' : 'background_luminance', 
         #        'neurons': list(analog_Xoff_ids), 
         #        'sheet_name' : 'X_OFF'
         #    }), 
-        #    fig_param={'dpi' : 100,'figsize': (6,6)}, 
+        #    fig_param={'dpi' : 100,'figsize': (8,8)}, 
         #    plot_file_name="FlatLuminanceSensitivity_LGN_Off.png"
         # ).plot({
         #    '*.y_lim':(0,30), 
-        #    '*.x_lim':(-10,100), 
+        #    # '*.x_lim':(-10,100), 
         #    '*.fontsize':17
         # })
 
         #--------------------
-        # CONTRAST SENSITIVITY
-        # firing rate against contrast levels
-        # RetinalInputMovie( data_store, ParameterSet({}), plot_file_name="ContrastSensitivity_LGN",frame_duration=100).plot({'*.fontsize':7})
+        ## CONTRAST SENSITIVITY
+        ## firing rate against contrast levels
+        #RetinalInputMovie( data_store, ParameterSet({}), plot_file_name="ContrastSensitivity_LGN",frame_duration=100).plot({'*.fontsize':7})
         # dsv = param_filter_query( data_store, st_name='FullfieldDriftingSinusoidalGrating', analysis_algorithm=['TrialAveragedFiringRate'] )
         # PlotTuningCurve(
         #    dsv,
         #    ParameterSet({
-        #        'centered': False,
-        #        'mean': False,
-        #        'parameter_name' : 'contrast', 
-        #        'neurons': list(analog_Xon_ids), 
-        #        'sheet_name' : 'X_ON'
+        #         'polar': False,
+        #         'pool': False,
+        #         'centered': False,
+        #         'mean': False,
+        #         'parameter_name' : 'contrast', 
+        #         'neurons': list(analog_Xon_ids), 
+        #         'sheet_name' : 'X_ON'
         #    }), 
         #    fig_param={'dpi' : 100,'figsize': (8,8)}, 
         #    plot_file_name="ContrastSensitivity_LGN_On.png"
         # ).plot({
-        #    '*.y_lim':(0,80), 
-        #    #'*.x_scale':'log', '*.x_scale_base':2,
+        #    #'*.y_lim':(0,80), 
+        #    # '*.x_scale':'log', '*.x_scale_base':10,
         #    '*.fontsize':17
         # })
         # PlotTuningCurve(
         #    dsv,
         #    ParameterSet({
-        #        'centered': False,
-        #        'mean': False,
-        #        'parameter_name' : 'contrast', 
-        #        'neurons': list(analog_Xoff_ids), 
-        #        'sheet_name' : 'X_OFF'
+        #         'polar': False,
+        #         'pool': False,
+        #         'centered': False,
+        #         'mean': False,
+        #         'parameter_name' : 'contrast', 
+        #         'neurons': list(analog_Xoff_ids), 
+        #         'sheet_name' : 'X_OFF'
         #    }), 
         #    fig_param={'dpi' : 100,'figsize': (8,8)}, 
         #    plot_file_name="ContrastSensitivity_LGN_Off.png"
         # ).plot({
-        #    '*.y_lim':(0,80), 
-        #    #'*.x_scale':'log', '*.x_scale_base':2,
+        #    #'*.y_lim':(0,80), 
+        #    # '*.x_scale':'log', '*.x_scale_base':10,
         #    '*.fontsize':17
         # })
 
@@ -141,39 +149,43 @@ def perform_analysis_and_visualization(data_store):
         # SPATIAL FREQUENCY TUNING
         # firing rate against spatial frequencies
         # RetinalInputMovie( data_store, ParameterSet({}), plot_file_name="SpatialFrequencyTuning_LGN",frame_duration=100).plot({'*.fontsize':7})
-        # dsv = param_filter_query( data_store, st_name='FullfieldDriftingSinusoidalGrating', analysis_algorithm=['TrialAveragedFiringRate'] )
-        # PlotTuningCurve(
-        #    dsv,
-        #    ParameterSet({
-        #        'centered': False,
-        #        'mean': False,
-        #        'parameter_name' : 'spatial_frequency', 
-        #        'neurons': list(analog_Xon_ids), 
-        #        'sheet_name' : 'X_ON'
-        #    }), 
-        #    fig_param={'dpi' : 100,'figsize': (14,14)}, 
-        #    plot_file_name="SpatialFrequencyTuning_LGN_On.png"
-        # ).plot({
-        #    '*.y_lim':(0,80), 
-        #    '*.x_scale':'log', '*.x_scale_base':2,
-        #    '*.fontsize':17
-        # })
-        # PlotTuningCurve(
-        #    dsv,
-        #    ParameterSet({
-        #        'centered': False,
-        #        'mean': False,
-        #        'parameter_name' : 'spatial_frequency', 
-        #        'neurons': list(analog_Xoff_ids), 
-        #        'sheet_name' : 'X_OFF'
-        #    }), 
-        #    fig_param={'dpi' : 100,'figsize': (14,14)}, 
-        #    plot_file_name="SpatialFrequencyTuning_LGN_Off.png"
-        # ).plot({
-        #    '*.y_lim':(0,80), 
-        #    '*.x_scale':'log', '*.x_scale_base':2,
-        #    '*.fontsize':17
-        # })
+        dsv = param_filter_query( data_store, st_name='FullfieldDriftingSinusoidalGrating', analysis_algorithm=['TrialAveragedFiringRate'] )
+        PlotTuningCurve(
+           dsv,
+           ParameterSet({
+               'polar': False,
+               'pool': False,
+               'centered': False,
+               'mean': False,
+               'parameter_name' : 'spatial_frequency', 
+               'neurons': list(analog_Xon_ids), 
+               'sheet_name' : 'X_ON'
+           }), 
+           fig_param={'dpi' : 100,'figsize': (14,14)}, 
+           plot_file_name="SpatialFrequencyTuning_LGN_On.png"
+        ).plot({
+           '*.y_lim':(0,80), 
+           '*.x_scale':'log', '*.x_scale_base':2,
+           '*.fontsize':17
+        })
+        PlotTuningCurve(
+           dsv,
+           ParameterSet({
+               'polar': False,
+               'pool': False,
+               'centered': False,
+               'mean': False,
+               'parameter_name' : 'spatial_frequency', 
+               'neurons': list(analog_Xoff_ids), 
+               'sheet_name' : 'X_OFF'
+           }), 
+           fig_param={'dpi' : 100,'figsize': (14,14)}, 
+           plot_file_name="SpatialFrequencyTuning_LGN_Off.png"
+        ).plot({
+           '*.y_lim':(0,80), 
+           '*.x_scale':'log', '*.x_scale_base':2,
+           '*.fontsize':17
+        })
 
         #-----------------
         # TEMPORAL FREQUENCY TUNING                
@@ -182,6 +194,8 @@ def perform_analysis_and_visualization(data_store):
         # PlotTuningCurve(
         #    dsv,
         #    ParameterSet({
+        #        'polar': False,
+        #        'pool': False,
         #        'centered': False,
         #        'mean': False,
         #        'parameter_name' : 'temporal_frequency', 
@@ -198,6 +212,8 @@ def perform_analysis_and_visualization(data_store):
         # PlotTuningCurve(
         #    dsv,
         #    ParameterSet({
+        #        'polar': False,
+        #        'pool': False,
         #        'centered': False,
         #        'mean': False,
         #        'parameter_name' : 'temporal_frequency', 
@@ -220,6 +236,8 @@ def perform_analysis_and_visualization(data_store):
         # PlotTuningCurve(
         #     dsv,
         #     ParameterSet({
+        #         'polar': False,
+        #         'pool': False,
         #         'centered': False,
         #         'mean': False,
         #         'parameter_name' : 'radius', 
@@ -236,6 +254,8 @@ def perform_analysis_and_visualization(data_store):
         # PlotTuningCurve(
         #     dsv,
         #     ParameterSet({
+        #         'polar': False,
+        #         'pool': False,
         #         'centered': False,
         #         'mean': False,
         #         'parameter_name' : 'radius', 
@@ -253,13 +273,15 @@ def perform_analysis_and_visualization(data_store):
         # PlotTuningCurve(
         #    dsv,
         #    ParameterSet({
+        #         'polar': False,
+        #         'pool': False,
         #        'centered': False,
         #        'mean': False,
         #        'parameter_name' : 'radius', 
         #        'neurons': list(analog_Xon_ids), 
         #        'sheet_name' : 'X_ON'
         #    }), 
-        #    fig_param={'dpi' : 100,'figsize': (8,8)}, 
+        #     fig_param={'dpi' : 100,'figsize': (10,8)}, 
         #    plot_file_name="SizeTuning_Disk_LGN_On.png"
         # ).plot({
         #    #'*.y_lim':(0,120), 
@@ -269,16 +291,18 @@ def perform_analysis_and_visualization(data_store):
         # PlotTuningCurve(
         #    dsv,
         #    ParameterSet({
+        #         'polar': False,
+        #         'pool': False,
         #        'centered': False,
         #        'mean': False,
         #        'parameter_name' : 'radius', 
         #        'neurons': list(analog_Xoff_ids), 
         #        'sheet_name' : 'X_OFF'
         #    }), 
-        #    fig_param={'dpi' : 100,'figsize': (8,8)}, 
+        #     fig_param={'dpi' : 100,'figsize': (10,8)}, 
         #    plot_file_name="SizeTuning_Disk_LGN_Off.png"
         # ).plot({
-        #    '*.y_lim':(0,120), 
+        #    # '*.y_lim':(0,120), 
         #    '*.x_scale':'log', '*.x_scale_base':2,
         #    '*.fontsize':17
         # })
@@ -316,6 +340,8 @@ def perform_analysis_and_visualization(data_store):
         # PlotTuningCurve( 
         #   dsv, 
         #   ParameterSet({
+        #         'polar': False,
+        #         'pool': False,
         #        'centered': False,
         #        'mean': False,
         #       'parameter_name':'orientation', 
@@ -331,6 +357,8 @@ def perform_analysis_and_visualization(data_store):
         # PlotTuningCurve( 
         #   dsv, 
         #   ParameterSet({
+        #         'polar': False,
+        #         'pool': False,
         #        'centered': False,
         #        'mean': False,
         #       'parameter_name':'orientation', 
@@ -347,71 +375,68 @@ def perform_analysis_and_visualization(data_store):
         #-----------
         ## CONTOUR COMPLETION
         ## firing rate against square frequencies
-        RetinalInputMovie( data_store, ParameterSet({}), plot_file_name="Squares_LGN",frame_duration=100).plot({'*.fontsize':7})
-        ## Square Grating
-        dsv = param_filter_query( data_store, st_name='FullfieldDriftingSquareGrating', analysis_algorithm=['TrialAveragedCorrectedCrossCorrelation'] )
-        PerNeuronPairAnalogSignalListPlot(
-            dsv,
-            ParameterSet({
-                'sheet_name' : 'X_ON', 
-            }),
-            fig_param={'dpi' : 100,'figsize': (14,14)}, 
-            plot_file_name='SquareGrating_XCorr_LGN_On.png'
-        ).plot({
-            '*.y_lim':(-30,30), 
-            '*.fontsize':17
-        })
-        ## Flashing squares
-        dsv = param_filter_query( data_store, st_name='FlashingSquares', analysis_algorithm=['TrialAveragedCorrectedCrossCorrelation'] )
-        PerNeuronPairAnalogSignalListPlot(
-            dsv,
-            ParameterSet({
-                'sheet_name' : 'X_ON', 
-            }),
-            fig_param={'dpi' : 100,'figsize': (14,14)}, 
-            plot_file_name='FlashingSquare_XCorr_LGN_On.png'
-        ).plot({
-            '*.y_lim':(-30,30), 
-            '*.fontsize':17
-        })
+        # RetinalInputMovie( data_store, ParameterSet({}), plot_file_name="Squares_LGN",frame_duration=100).plot({'*.fontsize':7})
+        # ## Square Grating
+        # dsv = param_filter_query( data_store, st_name='FullfieldDriftingSquareGrating', analysis_algorithm=['TrialAveragedCorrectedCrossCorrelation'] )
+        # PerNeuronPairAnalogSignalListPlot(
+        #     dsv,
+        #     ParameterSet({
+        #         'sheet_name' : 'X_ON', 
+        #     }),
+        #     fig_param={'dpi' : 100,'figsize': (14,14)}, 
+        #     plot_file_name='SquareGrating_XCorr_LGN_On.png'
+        # ).plot({
+        #     '*.y_lim':(-30,30), 
+        #     '*.fontsize':17
+        # })
+        # ## Flashing squares
+        # dsv = param_filter_query( data_store, st_name='FlashingSquares', analysis_algorithm=['TrialAveragedCorrectedCrossCorrelation'] )
+        # PerNeuronPairAnalogSignalListPlot(
+        #     dsv,
+        #     ParameterSet({
+        #         'sheet_name' : 'X_ON', 
+        #     }),
+        #     fig_param={'dpi' : 100,'figsize': (14,14)}, 
+        #     plot_file_name='FlashingSquare_XCorr_LGN_On.png'
+        # ).plot({
+        #     '*.y_lim':(-30,30), 
+        #     '*.fontsize':17
+        # })
 
 
 
         # ---- OVERVIEW LGN0 ----
-        # [65, 83, 129, 145, 155, 158, 193, 215, 240, 305, 315, 336, 339, 364, 397, 403, 
-        # 426, 427, 428, 476, 482, 508, 533, 534, 540, 543, 603, 633, 634, 642, 687, 699, 
-        # 712, 735, 753, 755, 762, 772, 788, 791, 809, 818, 835, 846, 849, 872, 894, 919, 969, 995]
-        OverviewPlot(
-            data_store,
-            ParameterSet({
-                # 'centered': False,
-                # 'mean': False,
-                'sheet_name' : 'X_ON', 
-                'neuron' : 54, #
-                'sheet_activity' : {}
-            }),
-            fig_param={'dpi' : 100,'figsize': (14,12)},
-            plot_file_name="LGN_On_id_54.png"
-        ).plot({
-            'Vm_plot.*.y_lim' : (-100,-40),
-            '*.fontsize':7
-        })
+        # OverviewPlot(
+        #     data_store,
+        #     ParameterSet({
+        #         # 'centered': False,
+        #         # 'mean': False,
+        #         'sheet_name' : 'X_ON', 
+        #         'neuron' : analog_Xon_ids[0], #54, #
+        #         'sheet_activity' : {}
+        #     }),
+        #     fig_param={'dpi' : 100,'figsize': (14,12)},
+        #     plot_file_name="LGN_On_id_54.png"
+        # ).plot({
+        #     'Vm_plot.*.y_lim' : (-100,-40),
+        #     '*.fontsize':7
+        # })
 
-        OverviewPlot(
-            data_store,
-            ParameterSet({
-                # 'centered': False,
-                # 'mean': False,
-                'sheet_name' : 'X_ON', 
-                'neuron' : 57, #
-                'sheet_activity' : {}
-            }),
-            fig_param={'dpi' : 100,'figsize': (14,12)},
-            plot_file_name="LGN_On_id_57.png"
-        ).plot({
-            'Vm_plot.*.y_lim' : (-100,-40),
-            '*.fontsize':7
-        })
+        # OverviewPlot(
+        #     data_store,
+        #     ParameterSet({
+        #         # 'centered': False,
+        #         # 'mean': False,
+        #         'sheet_name' : 'X_ON', 
+        #         'neuron' : 57, #
+        #         'sheet_activity' : {}
+        #     }),
+        #     fig_param={'dpi' : 100,'figsize': (14,12)},
+        #     plot_file_name="LGN_On_id_57.png"
+        # ).plot({
+        #     'Vm_plot.*.y_lim' : (-100,-40),
+        #     '*.fontsize':7
+        # })
         
         # OverviewPlot(
         #    data_store,
