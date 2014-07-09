@@ -21,6 +21,16 @@ if MPI:
     mpi_comm = MPI.COMM_WORLD
 MPI_ROOT = 0
 
+###################################################################################################
+# Example (see the nmpi_saga.py)
+# $ mpirun python  run.py     nest            4            param/defaults       'test'
+#  JOB_EXECUTABLE  simscript  simulator_name  num_threads  parameter_file_path  simulation_run_name
+sys.argv = ["run.py", "nest", "2", "param/defaults" "'test'"]
+# simulation_run_name = sys.argv[-1]    
+# simulator_name = sys.argv[1]
+# num_threads = sys.argv[2]
+# parameters_url = sys.argv[3]
+###################################################################################################
 
 
 logger = mozaik.getMozaikLogger()

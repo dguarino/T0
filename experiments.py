@@ -9,12 +9,12 @@ def create_experiments(model):
     
             # LUMINANCE SENSITIVITY
             # as in PapaioannouWhite1972
-            # MeasureFlatLuminanceSensitivity(
-            #     model, 
-            #     luminances=[0.01, 0.1, 1.0, 10.0, 20.0, 100.0],
-            #     step_duration=147*7,
-            #     num_trials=14
-            # ),
+            MeasureFlatLuminanceSensitivity(
+                model, 
+                luminances=[0.01, 0.1, 1.0, 10.0, 20.0, 100.0],
+                step_duration=147*7,
+                num_trials=14
+            ),
 
             # CONTRAST SENSITIVITY
             # as in DerringtonLennie1984, HeggelundKarlsenFlugsrudNordtug1989, SaulHumphrey1990, BoninManteCarandini2005
@@ -45,19 +45,19 @@ def create_experiments(model):
     
             # SIZE TUNING
             # as in ClelandLeeVidyasagar1983, BoninManteCarandini2005
-            MeasureSizeTuning(
-                model, 
-                num_sizes=11, 
-                max_size=16.0, 
-                orientation=numpy.pi/2, 
-                spatial_frequency=0.15, 
-                temporal_frequency=8.0,
-                grating_duration=147*7,
-                contrasts=[50,100], #40,100  to look for contrast-dependent RF expansion
-                num_trials=10,
-                log_spacing=True,
-                with_flat=True #use also flat luminance discs
-            ),
+            # MeasureSizeTuning(
+            #     model, 
+            #     num_sizes=11, 
+            #     max_size=16.0, 
+            #     orientation=numpy.pi/2, 
+            #     spatial_frequency=0.15, 
+            #     temporal_frequency=8.0,
+            #     grating_duration=147*7,
+            #     contrasts=[50,100], #40,100  to look for contrast-dependent RF expansion
+            #     num_trials=10,
+            #     log_spacing=True,
+            #     with_flat=True #use also flat luminance discs
+            # ),
             
             # LIFELONG SPARSENESS
             # as in RathbunWarlandUsrey2010, AndolinaJonesWangSillito2007
