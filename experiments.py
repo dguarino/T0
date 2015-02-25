@@ -6,15 +6,20 @@ from parameters import ParameterSet
 
 def create_experiments(model):
     return [
-    
+ 
+            # SPONTANEOUS ACTIVITY (darkness)
+            # as in LevickWilliams1964, WebbTinsleyBarracloughEastonParkerDerrington2002, (TODO: TsumotoCreutzfeldtLegendy1978)
+            # NoStimulation( model, duration=147*7 ),
+
+   
             # LUMINANCE SENSITIVITY
             # as in PapaioannouWhite1972
-            MeasureFlatLuminanceSensitivity(
-                model, 
-                luminances=[0.01, 0.1, 1.0, 10.0, 20.0, 100.0],
-                step_duration=147*7,
-                num_trials=14
-            ),
+            # MeasureFlatLuminanceSensitivity(
+            #    model, 
+            #    luminances=[0.001, 0.01, 0.1, 1.0, 10.0, 20.0, 40.0, 60.0, 100.0],
+            #    step_duration=147*7,
+            #    num_trials=4
+            # ),
 
             # CONTRAST SENSITIVITY
             # as in DerringtonLennie1984, HeggelundKarlsenFlugsrudNordtug1989, SaulHumphrey1990, BoninManteCarandini2005
@@ -22,11 +27,11 @@ def create_experiments(model):
             #     model, 
             #     size=2.0,
             #     orientation=numpy.pi/2, 
-            #     spatial_frequency=0.15, 
+            #     spatial_frequency=0.3, 
             #     temporal_frequency=8.0,
             #     grating_duration=147*7,
-            #     contrasts=[0,10,25,40,75,100],
-            #     num_trials=14
+            #     contrasts=[0,20,50,75,100],
+            #     num_trials=15
             # ),
 
             # SPATIAL AND TEMPORAL FREQUENCY TUNING (with different contrasts)
@@ -35,26 +40,26 @@ def create_experiments(model):
             # MeasureFrequencySensitivity(
             #     model, 
             #     orientation=numpy.pi/2, 
-            #     contrasts=[20,50,100], #[50], #
-            #     spatial_frequencies=[0.001, 0.01, 0.05, 0.1, 0.16, 0.24, 0.64, 0.8, 1.0, 1.8], #[0.15], #[0.1, 0.16, 0.24], #
-            #     temporal_frequencies=[8.0], #[0.12, 0.5, 1.0, 2.0, 4.0, 6.0, 8.0, 16.0, 32.0, 50.0], #[6.0], #
+            #     contrasts=[100], #[25,50,100], #
+            #     spatial_frequencies=[0.2], #[0.02, 0.08, 0.16, 0.24, 0.64, 1.28], #[0.16], #
+            #     temporal_frequencies=[0.6, 1.2, 2.5, 5.1, 6.4, 8.0, 16.0], #[8.0], #
             #     grating_duration=147*7,
             #     frame_duration=7,
-            #     num_trials=5
+            #     num_trials=15
             # ),
     
             # SIZE TUNING
             # as in ClelandLeeVidyasagar1983, BoninManteCarandini2005
             # MeasureSizeTuning(
             #     model, 
-            #     num_sizes=11, 
+            #     num_sizes=8, 
             #     max_size=16.0, 
             #     orientation=numpy.pi/2, 
-            #     spatial_frequency=0.15, 
+            #     spatial_frequency=0.2, 
             #     temporal_frequency=8.0,
             #     grating_duration=147*7,
-            #     contrasts=[50,100], #40,100  to look for contrast-dependent RF expansion
-            #     num_trials=10,
+            #     contrasts=[100], #40,100  to look for contrast-dependent RF expansion
+            #     num_trials=15,
             #     log_spacing=True,
             #     with_flat=True #use also flat luminance discs
             # ),
@@ -80,16 +85,16 @@ def create_experiments(model):
             # By default, for this experiment only, the visual space ('size' parameter in the SpatioTemporalFilterRetinaLGN_default file)
             # is reduced to a flat line in order to have an horizontal distribution of neurons.
             # A separation distance is established and the experimental protocol finds the closest neurons to the distance specified.
-            # MeasureFeatureInducedCorrelation(
-            #     model, 
-            #     contrast=70, 
-            #     spatial_frequencies=[0.15],
-            #     separation=6,
-            #     temporal_frequency=6.0,
-            #     exp_duration=147*7,
-            #     frame_duration=7,
-            #     num_trials=10,
-            # ),
+            MeasureFeatureInducedCorrelation(
+                model, 
+                contrast=70, 
+                spatial_frequencies=[0.2],
+                separation=6,
+                temporal_frequency=8.0,
+                exp_duration=147*7,
+                frame_duration=7,
+                num_trials=15,
+            ),
               
         ]
 
