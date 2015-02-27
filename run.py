@@ -31,7 +31,7 @@ else:
     setup_logging()
     data_store = PickledDataStore(
         load=True,
-        parameters=ParameterSet({ 'store_stimuli':False, 'root_directory':'T0_test_____' })
+        parameters=ParameterSet({ 'store_stimuli':False, 'root_directory':'T0_data_____' })
         ,replace=True
     )
     logger.info('Loaded data store')

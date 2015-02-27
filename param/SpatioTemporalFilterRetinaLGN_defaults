@@ -3,7 +3,8 @@
     'params': {
         #'density': 200000, # for induced correlation experiment only
         #'size'  : (6.0,0.00005), # for induced correlation experiment only
-        'density': 1, # neurons per degree squared 
+        'magnification_factor': 200.0, # μm/degree
+        'density': 1.0, # neurons per degree squared 
         'size'  : (1.0,1.0), # deg; the effective size of the modelled section of retina/lgn
         'linear_scaler': 1.0, # overall scaling
         'mpi_reproducible_noise' : False,
@@ -11,8 +12,9 @@
         'cache_path' : 'retinal_cache/',
         'recorders' :  url("param/lgn_rec"),
         'recording_interval': 0.1, 
+
         'receptive_field': {
-            'func': 'cai97.stRF_2d',
+            'func': 'cai97.stRF_2d', # Changed for LGN only receiving from Retina
             'func_params': {
                 # spatial filter
                 # CaiDeAngelisFreeman1997, AlonsoUsreyReid2001, SceniakChatterjeeCallaway2006 (see paragraph: "Geniculocortical afferent CRF spatial structure")
@@ -23,17 +25,18 @@
                 # ex of an almost balanced RF (center: 1.0*0.7*0.7=0.49; surround: 0.13*1.8*1.8=0.42):
                 # balanced RF (center: 1.0*0.7*0.7=0.49; surround: 0.19*1.6*1.6=0.48):
                 'Ac': 1.0, # CaiDeAngelisFreeman1997, SceniakChatterjeeCallaway2006
-                'As': 0.265, #0.13, # CaiDeAngelisFreeman1997, SceniakChatterjeeCallaway2006
+                'As': 0.13, # CaiDeAngelisFreeman1997, SceniakChatterjeeCallaway2006
                 'sigma_c': 0.7, # deg CaiDeAngelisFreeman1997, AlonsoUsreyReid2001, SceniakChatterjeeCallaway2006 (0.5)
-                'sigma_s': 1.3, #1.8, # deg CaiDeAngelisFreeman1997, AlonsoUsreyReid2001, SceniakChatterjeeCallaway2006 (1.4)
-                # temporal filter
+                'sigma_s': 1.8, # deg CaiDeAngelisFreeman1997, AlonsoUsreyReid2001, SceniakChatterjeeCallaway2006 (1.4)
+                # single temporal filter
                 'K1': 1.05, # AllenFreeman2006
-                'K2': 0.7, # AllenFreeman2006
                 'c1': 0.14, # AllenFreeman2006
-                'c2': 0.12, # AllenFreeman2006
                 'n1': 7.0, # AllenFreeman2006
-                'n2': 8.0, # AllenFreeman2006
                 't1': -6.0, # ms # AllenFreeman2006
+                # inh
+                'K2': -0.3, # AllenFreeman2006
+                'c2': 0.12, # AllenFreeman2006
+                'n2': 8.0, # AllenFreeman2006
                 't2': -6.0, # ms # AllenFreeman2006
                 'td': 6.0, # time difference between ON-OFF # AllenFreeman2006
                 'subtract_mean': False,
@@ -47,35 +50,36 @@
 
         'gain_control' : {
             'gain': 50,  # nA*cd/m²
-            #'non_linear_gain' : None,
             'non_linear_gain' : {
-                'luminance_gain' : 50.0,
-                'luminance_scaler' : 0.001,
-                'contrast_scaler' : 0.0001,
+                'luminance_gain' : 10.0,
+                'luminance_scaler' : 0.01,
+                'contrast_scaler' : 0.001, #
             }
+            #'non_linear_gain' : None,
         },
 
         'cell': {
             'model': 'IF_cond_exp',
             'params': {
-                'v_thresh': -40.0, # WorgotterKoch1991
-                'v_rest': -70.0, # WorgotterKoch1991
-                'v_reset': -50.0, # Kremkow2014: WorgotterKoch1991(-90), LesicaWengJinYehAlonsoStanley2006(-50)
-                'tau_refrac': 2.0, # Kremkow2014
+                'v_thresh': -50.0, # HuertasGroffSmith2005 # -40.0, WorgotterKoch1991 # -35, # Coombes2003
+                'v_rest': -63.0, # Kim Sanchez-Vivez McCormick 1997 # HuertasGroffSmith2005 # -70.0, # WorgotterKoch1991 # 
+                'v_reset': -55.0, # HuertasGroffSmith2005, Kremkow2014, LesicaWengJinYehAlonsoStanley2006
+                'tau_refrac': 4.0, # HuertasGroffSmith2005 # 2 Kremkow2014
                 'tau_m': 10.0, # WorgotterKoch1991
-                'cm': 1.0, # WorgotterKoch1991 #0.29, Kremkow2014
-                'e_rev_E': 20.0, # WorgotterKoch1991
-                'e_rev_I': -81.0, # Traub_etal2005, not used at the moment
-                'tau_syn_E': 1.0, # CastiHayotXiaoKaplan2008 #1.5, Kremkow2014
-                'tau_syn_I': 1.0, # CastiHayotXiaoKaplan2008 #10.0, Kremkow2014
+                'cm': 1.0, # HuertasGroffSmith2005, WorgotterKoch1991 #0.29, Kremkow2014
+                'e_rev_E': 0.0, # HuertasGroffSmith2005
+                'e_rev_I': -85.0, # HuertasGroffSmith2005
+                'tau_syn_E': 1.5, # Kremkow
+                'tau_syn_I': 10.0, # Kremkow
             },
             'initial_values': {
                 'v': -70.0,
             },
         },
+
         'noise': {
             'mean': 0.0,
-            'stdev': 20.0, # nA
+            'stdev': 7.0, # nA, spontaneous
         }
     }
 }
